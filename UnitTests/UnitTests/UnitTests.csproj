@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\..\SWE2-CS\packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\..\SWE2\GitRepo\unit-tests\BIF-SWE2\CS\packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -48,14 +48,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SWE2-CS\PicDB\PicDB.csproj">
+    <ProjectReference Include="..\..\..\..\SWE2\GitRepo\SWE2-CS\PicDB\PicDB.csproj">
       <Project>{05f8743c-2d96-4708-b9ce-51155e907531}</Project>
       <Name>PicDB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\unit-tests\BIF-SWE2\CS\BIF-SWE2.Interfaces\BIF-SWE2.Interfaces.csproj">
+    <ProjectReference Include="..\..\..\..\SWE2\GitRepo\unit-tests\BIF-SWE2\CS\BIF-SWE2.Interfaces\BIF-SWE2.Interfaces.csproj">
       <Project>{27c44945-cb10-48bf-ad69-457d496b32a2}</Project>
       <Name>BIF-SWE2.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

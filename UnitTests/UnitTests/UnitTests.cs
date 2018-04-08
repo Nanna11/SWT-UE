@@ -6,6 +6,8 @@ using NUnit.Framework;
 using BIF.SWE2.Interfaces;
 using BIF.SWE2.Interfaces.Models;
 using BIF.SWE2.Interfaces.ViewModels;
+using PicDB.Models;
+using PicDB.ViewModels;
 using PicDB;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -28,7 +30,7 @@ namespace BIF.SWE2.UnitTests
             IPTCModel.Headline = null;
             pictureModel.IPTC = IPTCModel;
 
-            PhotorapherModel photographer = new PhotorapherModel();
+            PhotographerModel photographer = new PhotographerModel();
             photographer.LastName = LastName;
             pictureModel.Photographer = photographer;
 
@@ -83,8 +85,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void BussinesLayer_should_save_Camera()
         {
-            DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            dbf.Mock = true;
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
 
             string path = "path";
 
@@ -103,8 +107,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void BussinesLayer_should_delete_Camera()
         {
-            DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            dbf.Mock = true;
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
 
             string path = "path";
 
@@ -129,8 +135,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_should_return_previous_Pictures()
         {
-            DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            dbf.Mock = true;
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
 
             string path = "path";
             int currentIndex = 3;
@@ -173,8 +181,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_should_return_next_Pictures()
         {
-            DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            dbf.Mock = true;
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
 
             string path = "path";
             int currentIndex = 3;
@@ -217,8 +227,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_should_represent_Current_Picture_as_String()
         {
-            DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            dbf.Mock = true;
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
 
             string path = "path";
             string Expected;
@@ -248,8 +260,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_Current_Picture_should_match_Current_Index()
         {
-            DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            dbf.Mock = true;
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
 
             string path = "path";
             int currentIndex = 3;
