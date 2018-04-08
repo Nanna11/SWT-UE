@@ -6,8 +6,6 @@ using NUnit.Framework;
 using BIF.SWE2.Interfaces;
 using BIF.SWE2.Interfaces.Models;
 using BIF.SWE2.Interfaces.ViewModels;
-using PicDB.Models;
-using PicDB.ViewModels;
 using PicDB;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -85,10 +83,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void BussinesLayer_should_save_Camera()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
 
@@ -107,10 +105,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void BussinesLayer_should_delete_Camera()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
 
@@ -135,10 +133,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_should_return_previous_Pictures()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
             int currentIndex = 3;
@@ -181,10 +179,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_should_return_next_Pictures()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
             int currentIndex = 3;
@@ -227,10 +225,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_should_represent_Current_Picture_as_String()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
             string Expected;
@@ -260,10 +258,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureListViewModel_Current_Picture_should_match_Current_Index()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
             int currentIndex = 3;
@@ -294,7 +292,7 @@ namespace BIF.SWE2.UnitTests
 
         //    BusinessLayer businessLayer = new BusinessLayer(path);
 
-        //    PhotorapherModel photographer = new PhotorapherModel();
+        //    PhotographerModel photographer = new PhotographerModel();
         //    photographer.LastName = "Lastname";
 
         //    businessLayer.Save(photographer);
@@ -302,19 +300,19 @@ namespace BIF.SWE2.UnitTests
         //    InsertPictureModels(5, businessLayer);
 
         //    List<IPictureModel> pictures = businessLayer.GetPictures().ToList<IPictureModel>();
-        //    photographer = (PhotorapherModel)businessLayer.GetPhotographers().ElementAt(0);
+        //    photographer = (PhotographerModel)businessLayer.GetPhotographers().ElementAt(0);
         //    ((PictureModel)pictures[0]).Photographer = photographer;
         //    ((PictureModel)pictures[1]).Photographer = photographer;
         //    businessLayer.Save(pictures[0]);
         //    businessLayer.Save(pictures[1]);
 
-        //    photographer = (PhotorapherModel)businessLayer.GetPhotographer(photographer.ID);
+        //    photographer = (PhotographerModel)businessLayer.GetPhotographer(photographer.ID);
         //}
 
         [Test]
         public void PictureModel_should_return_Photographer()
         {
-            PhotorapherModel photographer = new PhotorapherModel();
+            PhotographerModel photographer = new PhotographerModel();
             photographer.LastName = "Lastname";
 
             PictureModel picture = new PictureModel("test");
@@ -328,7 +326,7 @@ namespace BIF.SWE2.UnitTests
         public void PictureViewModel_should_return_Photographer()
         {
             string LastName = "Lastname";
-            PhotorapherModel photographer = new PhotorapherModel();
+            PhotographerModel photographer = new PhotographerModel();
             photographer.LastName = LastName;
 
             PictureModel picture = new PictureModel("test");
@@ -351,7 +349,7 @@ namespace BIF.SWE2.UnitTests
 
             BusinessLayer businessLayer = new BusinessLayer(path);
 
-            PhotorapherModel photographer = new PhotorapherModel();
+            PhotographerModel photographer = new PhotographerModel();
             photographer.LastName = "Lastname";
 
             businessLayer.Save(photographer);
@@ -359,7 +357,7 @@ namespace BIF.SWE2.UnitTests
             InsertPictureModels(5, businessLayer);
 
             List<IPictureModel> pictures = businessLayer.GetPictures().ToList<IPictureModel>();
-            photographer = (PhotorapherModel)businessLayer.GetPhotographers().ElementAt(0);
+            photographer = (PhotographerModel)businessLayer.GetPhotographers().ElementAt(0);
             ((PictureModel)pictures[0]).Photographer = photographer;
             ((PictureModel)pictures[1]).Photographer = photographer;
             businessLayer.Save(pictures[0]);
@@ -464,7 +462,7 @@ namespace BIF.SWE2.UnitTests
                 receivedEvents.Add(e.PropertyName);
             };
 
-            pvm.Photographer = new PhotographerViewModel(new PhotorapherModel());
+            pvm.Photographer = new PhotographerViewModel(new PhotographerModel());
 
             foreach (string s in expectedEvents)
             {
@@ -489,7 +487,7 @@ namespace BIF.SWE2.UnitTests
                 receivedEvents.Add(e.PropertyName);
             };
 
-            pvm.Photographer = new PhotographerViewModel(new PhotorapherModel());
+            pvm.Photographer = new PhotographerViewModel(new PhotographerModel());
 
             foreach (string s in expectedEvents)
             {
@@ -580,7 +578,7 @@ namespace BIF.SWE2.UnitTests
             picture.IPTC = GetDemoIPTC();
 
             PictureViewModel pvm = new PictureViewModel(picture);
-            pvm.Photographer = new PhotographerViewModel(new PhotorapherModel());
+            pvm.Photographer = new PhotographerViewModel(new PhotographerModel());
 
             pvm.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
@@ -606,7 +604,7 @@ namespace BIF.SWE2.UnitTests
             picture.IPTC = GetDemoIPTC();
 
             PictureViewModel pvm = new PictureViewModel(picture);
-            pvm.Photographer = new PhotographerViewModel(new PhotorapherModel());
+            pvm.Photographer = new PhotographerViewModel(new PhotographerModel());
 
             pvm.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
@@ -674,7 +672,7 @@ namespace BIF.SWE2.UnitTests
         public void PictureViewModel_Photographer_should_be_not_be_null_if_Photographer_in_PictureModel_is_set()
         {
             PictureViewModel pvm = new PictureViewModel(new PictureModel("test"));
-            pvm.Photographer = new PhotographerViewModel(new PhotorapherModel());
+            pvm.Photographer = new PhotographerViewModel(new PhotographerModel());
             Assert.NotNull(pvm.Photographer);
         }
 
@@ -699,10 +697,10 @@ namespace BIF.SWE2.UnitTests
 
             InsertPictureModels(3, bl);
 
-            PhotorapherModel photographer = new PhotorapherModel();
+            PhotographerModel photographer = new PhotographerModel();
             bl.Save(photographer);
 
-            photographer = (PhotorapherModel)bl.GetPhotographers().ElementAt(0);
+            photographer = (PhotographerModel)bl.GetPhotographers().ElementAt(0);
 
             List<IPictureModel> pictures = bl.GetPictures().ToList<IPictureModel>();
             ((PictureModel)pictures[0]).Photographer = photographer;
