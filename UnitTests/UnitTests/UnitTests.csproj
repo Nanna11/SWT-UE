@@ -33,6 +33,7 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\SWE2-CS\packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
