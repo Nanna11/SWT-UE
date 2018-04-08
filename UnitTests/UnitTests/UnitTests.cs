@@ -777,10 +777,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void DataAccessLayer_should_throw_Exception_when_searching_for_non_existent_Photographer()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
             BusinessLayer bl = new BusinessLayer(path);
@@ -805,10 +805,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void DataAccessLayer_should_throw_Exception_when_searching_for_non_existent_Camera()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
             BusinessLayer bl = new BusinessLayer(path);
@@ -833,10 +833,10 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void DataAccessLayer_should_throw_Exception_when_searching_for_non_existent_Picture()
         {
-            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
-            //dbf.Mock = true;
-            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
-            dalFactory.IsReal = false;
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
+            //DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            //dalFactory.IsReal = false;
 
             string path = "path";
             BusinessLayer bl = new BusinessLayer(path);
@@ -881,7 +881,7 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void PictureViewModel_should_throw_Exception_when_FilePath_not_set()
         {
-            PictureViewModel pictureViewModel = new PictureViewModel();
+            PictureViewModel pictureViewModel = new PictureViewModel(new PictureModel("test"));
 
             Assert.That(() => pictureViewModel.FilePath, Throws.Exception);
         }
