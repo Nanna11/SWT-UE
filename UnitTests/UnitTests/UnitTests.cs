@@ -9,6 +9,7 @@ using BIF.SWE2.Interfaces.ViewModels;
 using PicDB.Models;
 using PicDB.ViewModels;
 using PicDB;
+using System.IO;
 
 namespace BIF.SWE2.UnitTests
 {
@@ -269,6 +270,128 @@ namespace BIF.SWE2.UnitTests
             Assert.IsTrue(pictureViewList[currentIndex] == pictureListViewModel.CurrentPicture);
         }
 
+        [Test]
+        public void PictureViewModel_should_have_Picture_Path_to_Picture()
+        {
+            string Filename = "Testfile.jpg";
+            PictureModel pictureModel = new PictureModel(Filename);
+            PictureViewModel pictureViewModel = new PictureViewModel(pictureModel);
 
+            string ExpectedShouldContain = Path.Combine("Pictures", Filename);
+
+            Assert.IsTrue(pictureViewModel.FilePath.Contains(ExpectedShouldContain));
+        }
+
+        [Test]
+        public void DataAccessLayer_should_throw_Exception_when_searching_for_non_existent_Photographer()
+        {
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
+
+            string path = "path";
+            BusinessLayer bl = new BusinessLayer(path);
+
+            var photographers = bl.GetPhotographers().ToList();
+
+            List<int> IDs = new List<int>();
+            foreach(PhotographerModel p in photographers)
+            {
+                IDs.Add(p.ID);
+            }
+
+            int ID = 0;
+            while(IDs.Contains(ID))
+            {
+                ID++;
+            }
+
+            Assert.That(() => bl.GetPhotographer(ID), Throws.Exception);
+        }
+
+        [Test]
+        public void DataAccessLayer_should_throw_Exception_when_searching_for_non_existent_Camera()
+        {
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
+
+            string path = "path";
+            BusinessLayer bl = new BusinessLayer(path);
+
+            List<ICameraModel> cameras = bl.GetCameras().ToList();
+
+            List<int> IDs = new List<int>();
+            foreach (CameraModel cam in cameras)
+            {
+                IDs.Add(cam.ID);
+            }
+
+            int ID = 0;
+            while (IDs.Contains(ID))
+            {
+                ID++;
+            }
+
+            Assert.That(() => bl.GetCamera(ID), Throws.Exception);
+        }
+
+        [Test]
+        public void DataAccessLayer_should_throw_Exception_when_searching_for_non_existent_Picture()
+        {
+            //DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            //dbf.Mock = true;
+            DataAccessLayerFactory dalFactory = DataAccessLayerFactory.Instance;
+            dalFactory.IsReal = false;
+
+            string path = "path";
+            BusinessLayer bl = new BusinessLayer(path);
+
+            List<IPictureModel> pictures = bl.GetPictures().ToList();
+
+            List<int> IDs = new List<int>();
+            foreach (PictureModel pic in pictures)
+            {
+                IDs.Add(pic.ID);
+            }
+
+            int ID = 0;
+            while (IDs.Contains(ID))
+            {
+                ID++;
+            }
+
+            Assert.That(() => bl.GetPicture(ID), Throws.Exception);
+        }
+
+        [Test]
+        public void PictureViewModel_should_throw_Exception_when_FilePath_empty()
+        {
+            string Filename = string.Empty;
+            PictureModel pictureModel = new PictureModel(Filename);
+            PictureViewModel pictureViewModel = new PictureViewModel(pictureModel);
+
+            Assert.That(() => pictureViewModel.FilePath, Throws.Exception);
+        }
+
+        [Test]
+        public void PictureViewModel_should_throw_Exception_when_FilePath_null()
+        {
+            string Filename = null;
+            PictureModel pictureModel = new PictureModel(Filename);
+            PictureViewModel pictureViewModel = new PictureViewModel(pictureModel);
+
+            Assert.That(() => pictureViewModel.FilePath, Throws.Exception);
+        }
+
+        [Test]
+        public void PictureViewModel_should_throw_Exception_when_FilePath_not_set()
+        {
+            PictureViewModel pictureViewModel = new PictureViewModel();
+
+            Assert.That(() => pictureViewModel.FilePath, Throws.Exception);
+        }
     }
 }
