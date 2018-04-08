@@ -252,6 +252,7 @@ namespace BIF.SWE2.UnitTests
             List<IPictureModel> pictureList = businessLayer.GetPictures().ToList<IPictureModel>();
 
             PictureListViewModel pvm = new PictureListViewModel(pictureList);
+            pvm.CurrentIndex = currentIndex;
 
             Assert.IsTrue(pvm.CurrentPictureAsString == Expected);
         }
@@ -688,12 +689,14 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void DataAccessLayer_should_throw_exception_when_connection_not_available()
         {
-            Assert.That(() => new DataAccessLayer("","","",""), Throws.Exception);
+            Assert.That(() => new DataAccessLayer("","","test",""), Throws.Exception);
         }
 
         [Test]
         public void BusinessLayer_should_remove_all_references_if_photographer_is_deleted()
         {
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
             BusinessLayer bl = new BusinessLayer("path");
 
             InsertPictureModels(3, bl);
@@ -718,6 +721,8 @@ namespace BIF.SWE2.UnitTests
         [Test]
         public void BusinessLayer_should_remove_all_references_if_camera_is_deleted()
         {
+            DBConnectionFactory dbf = DBConnectionFactory.Instance;
+            dbf.Mock = true;
             BusinessLayer bl = new BusinessLayer("path");
 
             InsertPictureModels(3, bl);
@@ -768,6 +773,7 @@ namespace BIF.SWE2.UnitTests
             string Filename = "Testfile.jpg";
             PictureModel pictureModel = new PictureModel(Filename);
             PictureViewModel pictureViewModel = new PictureViewModel(pictureModel);
+            GlobalInformation.InitializeInstance("Pictures");
 
             string ExpectedShouldContain = Path.Combine("Pictures", Filename);
 
@@ -859,31 +865,79 @@ namespace BIF.SWE2.UnitTests
         }
 
         [Test]
-        public void PictureViewModel_should_throw_Exception_when_FilePath_empty()
+        public void GlobalInformation_should_throw_Exception_when_FilePath_not_set()
         {
-            string Filename = string.Empty;
-            PictureModel pictureModel = new PictureModel(Filename);
-            PictureViewModel pictureViewModel = new PictureViewModel(pictureModel);
+            bool exception = false;
+            GlobalInformation.Uninitialize();
 
-            Assert.That(() => pictureViewModel.FilePath, Throws.Exception);
+            try
+            {
+                string test = GlobalInformation.Instance.Folder;
+            }
+            catch (SingletonNotInitializedException)
+            {
+                exception = true;
+            }
+
+            Assert.True(exception);
         }
 
         [Test]
-        public void PictureViewModel_should_throw_Exception_when_FilePath_null()
+        public void GlobalInformation_should_throw_Exception_when_FilePath_empty()
         {
-            string Filename = null;
-            PictureModel pictureModel = new PictureModel(Filename);
-            PictureViewModel pictureViewModel = new PictureViewModel(pictureModel);
+            bool exception = false;
 
-            Assert.That(() => pictureViewModel.FilePath, Throws.Exception);
+            try
+            {
+                GlobalInformation.Instance.Folder = String.Empty;
+            }
+            catch (PathNotSetException)
+            {
+                exception = true;
+            }
+            catch (SingletonNotInitializedException)
+            {
+                try
+                {
+                    GlobalInformation.InitializeInstance(String.Empty);
+                }
+                catch (ArgumentNullException)
+                {
+                    exception = true;
+                }
+                
+            }
+
+            Assert.True(exception);
         }
 
         [Test]
-        public void PictureViewModel_should_throw_Exception_when_FilePath_not_set()
+        public void GlobalInformation_should_throw_Exception_when_FilePath_null()
         {
-            PictureViewModel pictureViewModel = new PictureViewModel(new PictureModel("test"));
+            bool exception = false;
 
-            Assert.That(() => pictureViewModel.FilePath, Throws.Exception);
+            try
+            {
+                GlobalInformation.Instance.Folder = null;
+            }
+            catch (PathNotSetException)
+            {
+                exception = true;
+            }
+            catch (SingletonNotInitializedException)
+            {
+                try
+                {
+                    GlobalInformation.InitializeInstance(null);
+                }
+                catch (ArgumentNullException)
+                {
+                    exception = true;
+                }
+
+            }
+
+            Assert.True(exception);
         }
 
         private IEXIFModel GetDemoExif()
